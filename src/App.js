@@ -1,6 +1,8 @@
+import "../src/style/main.scss";
 import React, { Component } from "react";
 import './App.css';
-import moment from 'moment';
+
+
 import {
   BrowserRouter as Router,
   Route,
@@ -15,22 +17,61 @@ import About from "./components/pages/about";
 import Contact from "./components/pages/Contact";
 import Blog from "./components/pages/blog";
 import PortfolioDetail from "./components/portfolio/portfolio-detail";
+import Auth from "./components/pages/auth";
 import NoMatch from "./components/pages/no-match";
 
 
+
 export default class App extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        loggedInStatus: "NOT_LOGGED_IN"
+      }
+
+      this.handleSuccessfullLogin = this.handleSuccessfullLogin.bind(this)
+      this.handleUnSuccessfullLogin = this.handleUnSuccessfullLogin.bind(this);
+    }
+
+    handleSuccessfullLogin(){
+      this.setState({
+        loggedInStatus: "LOGGED_IN"
+      })
+    }
+
+    handleUnSuccessfullLogin(){
+      this.setState({
+        loggedInStatus: "NOT_LOGGED_IN"
+      });
+    
+  }
+
 render() {
+
   return (
-    <div className="App">
+    <div className="container">
       <Router>
-      <h1>Angel Betancourt</h1>
-     <div>
-      {moment().format('MMMM Do YYYY, h:mm:ss a')}
-     </div>
         <div>
           <NavigationContainer />
           <Routes>
             <Route exact path="/" element={<Home/>}/>
+
+            <Route
+             path="/auth" 
+             render={props => (
+              <Auth
+                {...props}
+                handleSuccessfulLogin={this.handleSuccessfulLogin}
+                handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}
+
+              />
+
+             )}
+
+            /> 
+
+
             <Route path="/about-me" element={<About/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/blog" element={<Blog/>}/>
