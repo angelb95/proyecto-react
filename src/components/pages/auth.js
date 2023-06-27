@@ -7,17 +7,21 @@ export default class Auth extends Component {
     super(props);
 
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
-    this.handleUnsuccessfulAuth = this.handleUnsuccessfulAuth.bind(this);
+    this.handleUnSuccessfulAuth = this.handleUnSuccessfulAuth.bind(this);
+
   }
 
-  handleSuccessfulAuth() {
-    this.props.handleSuccessfulLogin();
+  handleSuccessfulAuth(){
+    this.props.handleSuccesfulLogin(); 
     this.props.history.push("/");
+
   }
 
-  handleUnsuccessfulAuth() {
+  handleUnsuccessfulAuth(){
     this.props.handleUnsuccessfulLogin();
   }
+
+
 
   render() {
     return (
@@ -30,10 +34,10 @@ export default class Auth extends Component {
         />
 
         <div className="right-column">
-          <Login
-            handleSuccessfulAuth={this.handleSuccessfulAuth}
-            handleUnsuccessfulAuth={this.handleUnsuccessfulAuth}
-          />
+          <Login 
+          handleSuccessfulAuth={this.handleSuccessfulAuth}
+          handleUnsiuccessfulAuth
+           />
         </div>
       </div>
     );

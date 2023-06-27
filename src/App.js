@@ -1,8 +1,5 @@
 import "../src/style/main.scss";
 import React, { Component } from "react";
-import './App.css';
-
-
 import {
   BrowserRouter as Router,
   Route,
@@ -10,7 +7,6 @@ import {
   NavLink,
   Link,
 } from 'react-router-dom';
-import PortfolioContainer from "./components/portfolio/portfolio-container";
 import NavigationContainer from "./components/navigation/navigation-container";
 import Home from "./components/pages/home";
 import About from "./components/pages/about";
@@ -30,17 +26,17 @@ export default class App extends Component {
         loggedInStatus: "NOT_LOGGED_IN"
       }
 
-      this.handleSuccessfullLogin = this.handleSuccessfullLogin.bind(this)
-      this.handleUnSuccessfullLogin = this.handleUnSuccessfullLogin.bind(this);
+      this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
+    this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
     }
 
-    handleSuccessfullLogin(){
+    handleSuccessfulLogin() {
       this.setState({
         loggedInStatus: "LOGGED_IN"
       })
     }
 
-    handleUnSuccessfullLogin(){
+    handleUnSuccessfulLogin() {
       this.setState({
         loggedInStatus: "NOT_LOGGED_IN"
       });
@@ -54,20 +50,21 @@ render() {
       <Router>
         <div>
           <NavigationContainer />
+
+          <h2>{this.state.loggedInStatus}</h2>
           <Routes>
             <Route exact path="/" element={<Home/>}/>
 
             <Route
              path="/auth" 
-             render={props => (
+             element={
               <Auth
-                {...props}
+                
                 handleSuccessfulLogin={this.handleSuccessfulLogin}
-                handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}
-
+                    handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
               />
 
-             )}
+             }
 
             /> 
 
