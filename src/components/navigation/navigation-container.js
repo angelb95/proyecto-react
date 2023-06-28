@@ -1,6 +1,5 @@
 import react from "react";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const NavigationComponent = props => {
@@ -71,4 +70,4 @@ const NavigationComponent = props => {
   );
 };
 
-export default withRouter(NavigationComponent);
+export default (NavigationComponent);
