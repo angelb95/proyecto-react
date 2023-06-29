@@ -1,12 +1,6 @@
 import "../src/style/main.scss";
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  NavLink,
-  Link,
-} from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationContainer from "./components/navigation/navigation-container";
 import Home from "./components/pages/home";
 import About from "./components/pages/about";
@@ -82,7 +76,10 @@ export default class App extends Component {
   }
 
   authorizedPages() {
-    return [<Route path="/portfolio-manager" component={PortfolioManager} />];
+    return [<Route
+       key="portfolio-manager" 
+       path="/portfolio-manager" 
+       element={PortfolioManager} />];
   }
 
   render() {
@@ -96,31 +93,31 @@ export default class App extends Component {
             />
 
             <Routes>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" element={<Home/>} />
 
               <Route
                 path="/auth"
-                render={props => (
+                element={
                   <Auth
-                    {...props}
+                    
                     handleSuccessfulLogin={this.handleSuccessfulLogin}
                     handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
                   />
-                )}
+                }
               />
 
-              <Route path="/about-me" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog} />
+              <Route path="/about-me" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
               {this.state.loggedInStatus === "LOGGED_IN" ? (
                 this.authorizedPages()
               ) : null}
               <Route
                 exact
                 path="/portfolio/:slug"
-                component={PortfolioDetail}
+                element={PortfolioDetail}
               />
-              <Route component={NoMatch} />
+              <Route element={NoMatch} />
             </Routes>
           </div>
         </Router>
