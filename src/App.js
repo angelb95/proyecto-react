@@ -1,9 +1,9 @@
 import "../src/style/main.scss";
 import React, { Component } from "react";
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import { library } from "@fortawesome/fontawesome-svg-core";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTrash, faSignOutAlt, faEdit, faSpinner} from "@fortawesome/free-solid-svg-icons";
+
 
 import NavigationContainer from "./components/navigation/navigation-container";
 import Home from "./components/pages/home";
@@ -16,12 +16,13 @@ import Auth from "./components/pages/auth";
 import NoMatch from "./components/pages/no-match";
 import BlogDetail from "./components/pages/blog-detail";
 import axios from "axios";
-
-library.add(faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle);
-
+import Icons from "./helpers/icons";
 export default class App extends Component {
   constructor(props) {
     super(props);
+
+    Icons();
+
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN"
     };
@@ -101,9 +102,10 @@ export default class App extends Component {
               <Route path="/contact" element={Contact} />
 
               <Route
-                path="/blog"
+                path="/b/:slug"
                 render={props => (
-                  <Blog {...props} loggedInStatus={this.state.loggedInStatus} />
+                  <BlogDetail { ...props} loggedInStatus={this.state.loggedInStatus}
+               />
                 )}
               />
 
